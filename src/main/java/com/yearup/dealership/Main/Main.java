@@ -293,7 +293,7 @@ public class Main {
         System.out.println("Vehicle added successfully.");
     }
 
-    private static void removeVehicleMenu(VehicleDao vehicleDao, InventoryDao inventoryDao, Scanner scanner) {
+    private static void removeVehicleMenu(VehicleDao vehicleDao, InventoryDao inventoryDao, Scanner scanner) throws SQLException {
         System.out.print("Enter the VIN of the vehicle to remove: (Vehicle should not be already sold or leased) ");
         String vin = scanner.nextLine();
 

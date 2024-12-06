@@ -1,6 +1,7 @@
 package com.yearup.dealership.db;
 
 import com.yearup.dealership.models.LeaseContract;
+import com.yearup.dealership.models.Vehicle;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,25 +18,31 @@ public class LeaseDao {
 
     public void addLeaseContract(LeaseContract leaseContract) throws SQLException{
 
-        String query = "INSERT INTO lease_contract (date, customer_name, customer_email, vin, expected_ending_value, lease_fee)" +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO lease_contract (VIN, lease_start, lease_end, monthly_payment)" +
+                "VALUES (?, ?, ?, ?)";
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(query,
             PreparedStatement.RETURN_GENERATED_KEYS)){
 
-            statement.setString(1, "date");
-            statement.setString(2, "customer_name");
-            statement.setString(3, "customer_email");
-            statement.setString(4, "vin");
-            statement.setString(5, "expected_ending_value");
-            statement.setString(6, "lease_fee");
+            statement.setString(1, leaseContract.getVin());
+            statement.setString(2, leaseContract.getLeaseStart().toString());
+            statement.setString(3, leaseContract.getLeaseEnd().toString());
+            statement.setDouble(4, leaseContract.getMonthlyPayment());
 
+            int rowsAffected = statement.executeUpdate();
 
-            try(ResultSet generatedKeys = statement.getGeneratedKeys()){
-                if(generatedKeys.next()){
-                    int contractId = generatedKeys.getInt(1);
+            if (rowsAffected > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int contractId = generatedKeys.getInt(1);
+                        System.out.println("Contract ID: " + contractId);
+                    } else {
+                        System.out.println("No contract ID generated.");
+                    }
                 }
+            } else {
+                System.out.println("Insert failed, no rows affected.");
             }
         }
 
