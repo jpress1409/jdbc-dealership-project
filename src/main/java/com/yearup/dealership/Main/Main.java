@@ -72,23 +72,23 @@ public class Main {
         scan.close();
     }
 
-    private static void addContractMenu(SalesDao salesDao, LeaseDao leaseDao, Scanner scanner) throws SQLException {
+    private static void addContractMenu(SalesDao salesDao, LeaseDao leaseDao, Scanner scan) throws SQLException {
         System.out.print("Enter the VIN of the vehicle to add a contract: ");
-        String vin = scanner.nextLine();
+        String vin = scan.nextLine();
 
         System.out.println("\nSelect a contract type:");
         System.out.println("1. Sales Contract");
         System.out.println("2. Lease Contract");
         System.out.print("Enter your choice: ");
-        int contractTypeChoice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        int contractTypeChoice = scan.nextInt();
+        scan.nextLine(); // Consume the newline character
 
         switch (contractTypeChoice) {
             case 1:
-                addSalesContract(salesDao, vin, scanner);
+                addSalesContract(salesDao, vin, scan);
                 break;
             case 2:
-                addLeaseContract(leaseDao, vin, scanner);
+                addLeaseContract(leaseDao, vin, scan);
                 break;
             default:
                 System.out.println("Invalid choice. Contract not added.");

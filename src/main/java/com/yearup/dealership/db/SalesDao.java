@@ -19,7 +19,7 @@ public class SalesDao {
 
             VehicleDao dao = new VehicleDao(dataSource);
 
-            String query = "INSERT INTO lease_contract (VIN, sale_date, price)" +
+            String query = "INSERT INTO sales_contracts (VIN, sale_date, price)" +
                     "VALUES (?, ?, ?)";
 
             try(Connection connection = dataSource.getConnection();

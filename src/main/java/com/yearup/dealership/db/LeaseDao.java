@@ -18,7 +18,7 @@ public class LeaseDao {
 
     public void addLeaseContract(LeaseContract leaseContract) throws SQLException{
 
-        String query = "INSERT INTO lease_contract (VIN, lease_start, lease_end, monthly_payment)" +
+        String query = "INSERT INTO lease_contracts (VIN, lease_start, lease_end, monthly_payment)" +
                 "VALUES (?, ?, ?, ?)";
 
         try(Connection connection = dataSource.getConnection();

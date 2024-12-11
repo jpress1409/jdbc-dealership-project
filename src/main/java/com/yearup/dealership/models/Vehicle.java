@@ -14,12 +14,12 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String vin, String make, String model, int year, boolean sold ,String color, String vehicleType, int odometer, double price) {
+    public Vehicle(String vin, String make, String model ,int year, boolean sold, String color, String vehicleType, int odometer, double price) {
         this.vin = vin;
         this.make = make;
         this.model = model;
-        this.year = year;
         this.color = color;
+        this.year = year;
         this.vehicleType = vehicleType;
         this.odometer = odometer;
         this.price = price;
